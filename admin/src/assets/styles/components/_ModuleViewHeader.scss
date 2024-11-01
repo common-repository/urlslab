@@ -1,0 +1,50 @@
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+.urlslab-moduleView {
+
+	&-header,
+	&-headerBottom {
+		background-color: $white;
+	}
+
+	&-headerTop {
+		padding: 1.5em 1.625em 0;
+		border-bottom: 1px solid $grey-light;
+
+		a,
+		button {
+
+			&.active {
+				pointer-events: none;
+				border-bottom: 3px solid $primary-color !important;
+			}
+		}
+	}
+
+	&-headerBottom {
+		position: relative;
+		z-index: 2;
+		padding: 1em 1.625em;
+
+		&__top {
+			position: relative;
+			z-index: 3;
+		}
+
+		&__customPanel {
+
+			/*
+			padding: 1em 1.625em;
+			background-color: $white;
+			border-top: 1px solid $grey-light;
+			*/
+			border-bottom: 1px solid $grey-light;
+		}
+
+		.urlslab-SortMenu {
+			min-width: 13em;
+			max-width: none;
+		}
+	}
+}

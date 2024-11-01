@@ -1,0 +1,61 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+strong,
+b {
+	font-weight: 600;
+}
+
+@each $class, $size in $fontSizes {
+	.fs-#{$class} {
+		font-size: $size !important;
+	}
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	margin: 0;
+	color: $black;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
+h3 {
+	font-size: 1.3rem;
+}
+
+h4 {
+	font-size: 0.875rem;
+}
+
+h5 {
+	font-size: 0.8125rem;
+}
+
+.regular[class] {
+	font-weight: 400;
+}
+
+.normal[class] {
+	font-style: normal;
+}
+
+code {
+	display: block;
+	font-size: 0.8125rem;
+	color: $saturated-red;
+	background-color: $grey-lightest;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+.message {
+	font-size: 0.75rem;
+	font-weight: 400;
+}

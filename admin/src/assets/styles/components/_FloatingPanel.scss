@@ -1,0 +1,125 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urslab-floating-panel {
+
+	&[class] {
+		position: absolute;
+		z-index: 1;
+		font-size: 1rem;
+		padding: 1rem !important;
+		background-color: $white;
+		filter: drop-shadow(0 4px 1rem rgba($black, 0.16));
+	}
+
+	&.floatAtTop {
+		z-index: 10000;
+	}
+
+	$limitHeight: (20,30,40,50,60);
+
+	[class*="limitHeight"] {
+
+		@include scrollbar;
+		overflow-y: auto;
+	}
+
+	@each $height in $limitHeight {
+		.limitHeight-#{$height} {
+			max-height: #{$height}#{"em"};
+		}
+	}
+
+	&__generator {
+		max-width: 40rem;
+		font-size: 0.825rem;
+		left: calc(100vw - var(--posLeft));
+		bottom: calc(100vh - var(--posBottom) + 1rem);
+	}
+
+	&.urslab-TableFilter-panel {
+		z-index: 4; // override z-index of module view header bottom that possibly covers popups
+
+		.urlslab-SortMenu {
+			min-width: 13em;
+			max-width: none;
+		}
+	}
+
+	> * {
+		font-size: 0.92307em;
+	}
+
+	.urlslab-FilterMenu__title {
+		min-height: 2.6em;
+	}
+
+	.urlslab-datetime-range {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.urlslab-inputField-datetime {
+			width: calc(50% - 1em);
+		}
+	}
+
+	.react-datepicker {
+
+		&-wrapper {
+			display: block;
+		}
+
+		&__input-container {
+			display: flex;
+		}
+	}
+
+	.urlslab-panel-header {
+		padding-left: 1rem;
+		margin-left: -1rem;
+		margin-right: -1rem;
+	}
+
+	&::before,
+	&.onBottom::before {
+
+		@include triangle(1.5em, $white, "up");
+		position: absolute;
+		transform: scaleX(1.25);
+		top: -1.35em;
+		left: 1.35em;
+		content: "";
+
+		.menu-left & {
+			left: auto;
+			right: 1.65em;
+		}
+	}
+
+	&.onTop::before {
+
+		@include triangle(1.5em, $white, "down");
+		position: absolute;
+		transform: scaleX(1.25);
+		top: auto;
+		bottom: -1.35em;
+		content: "";
+	}
+
+	@media (min-width: $breakpoint-desktop-box) {
+
+		&:not(.onBottom):not(.onTop) {
+			top: -0.35em;
+			left: calc(100% + 0.5em);
+			transform: none;
+
+			&::before {
+
+				@include triangle(1.5em, $white, "left");
+				top: 0.75em;
+				left: -1.5em;
+			}
+		}
+	}
+}

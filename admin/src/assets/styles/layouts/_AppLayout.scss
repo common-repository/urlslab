@@ -1,0 +1,58 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.tox.tox-tinymce-aux[class] {
+	z-index: 10000 !important;
+}
+
+.urlslab-errorPage {
+	flex-direction: column;
+	justify-content: center;
+	height: calc(100vh - 10em);
+
+	&-error {
+		text-align: center;
+		max-width: 50%;
+	}
+}
+
+.urlslab-app {
+
+	&-main {
+		flex: auto;
+	}
+}
+// Removes Elementor and other notifications when in URLslab plugin page
+
+#adminmenuback {
+	z-index: 6;
+}
+
+.php-error {
+
+	#adminmenuback,
+	#adminmenuwrap {
+		margin-top: 0;
+	}
+}
+
+.notice[class],
+#wpfooter {
+	display: none !important;
+}
+
+#wpbody {
+	position: static;
+	// overflow-x: hidden;
+}
+
+// Moves our app padding
+#wpcontent,
+#wpbody,
+#wpbody-content {
+
+	// @include square(100%);
+	// position: absolute;
+	padding: 0 !important;
+	float: none;
+}

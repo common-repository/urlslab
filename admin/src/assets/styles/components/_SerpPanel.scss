@@ -1,0 +1,28 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-serpPanel {
+
+    &-title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-empty-table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &-keywords-item {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    &-input {
+        display: flex;
+        flex-direction: row;
+    }
+
+}

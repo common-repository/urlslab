@@ -1,0 +1,72 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-loader {
+
+	@include square(100%);
+	opacity: 0.6;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 1em;
+
+	&.white {
+		color: $white;
+	}
+
+	&.overlay {
+		position: absolute;
+		z-index: 99999;
+		opacity: 1;
+		left: $mainMenuWidth;
+		top: 0;
+	}
+
+	&.dark {
+
+		circle {
+			fill: $white;
+		}
+	}
+
+	&-anim {
+
+		@include square(3em);
+		display: block;
+		margin: 0 auto 0.5em;
+
+		.small & {
+
+			@include square(2em);
+			margin: 0;
+		}
+	}
+
+	&.small {
+
+		@include square(auto);
+	}
+
+	&.noText {
+
+		.urlslab-loader-text {
+			display: none;
+		}
+	}
+
+	&.fullscreen {
+		height: 100vh;
+	}
+
+	.urlslab-tooltip & {
+		opacity: 1;
+		margin: 1em;
+
+		&-anim {
+
+			@include square(4em);
+		}
+	}
+}

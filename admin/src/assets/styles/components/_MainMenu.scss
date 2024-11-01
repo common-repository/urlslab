@@ -1,0 +1,148 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+
+@use "sass:color";
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+
+%menuBg {
+
+	&::after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: var(--adminmenuHeight);
+		width: 100%;
+		content: "";
+		background-color: $mainmenu-graphite;
+	}
+}
+
+.urlslab-mainmenu {
+
+	@extend %menuBg;
+	position: sticky;
+	top: 32px;
+	z-index: 5;
+	height: 100%;
+	padding: 0 0 1em;
+	margin: 0;
+	font-size: 0.75rem;
+	flex: 0 0 auto;
+	color: $white;
+	width: $mainMenuWidth;
+
+	&-menu {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		flex: 1 0 auto;
+
+		>* {
+			position: relative;
+			z-index: 1;
+		}
+
+		button,
+		a.urlslab-mainmenu-btn {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			padding: 0.5em 0;
+			padding-right: 2.1666em;
+
+			//override default global style of anchor links
+			color: currentcolor !important;
+			font-weight: inherit !important;
+			text-decoration: none;
+
+			&.has-icon {
+				display: flex;
+				align-items: center;
+				font-size: 0.8125rem;
+				font-weight: 500 !important;
+				padding-top: 1.45em;
+				padding-bottom: 1.45em;
+				overflow: hidden;
+
+				svg {
+
+					@include square(1.55em);
+					display: block;
+					fill: $white;
+					flex: 0 0 1.55em;
+					margin: auto 1.65em;
+					transform: translateZ(0);
+					transition: all $transitionTime;
+				}
+			}
+		}
+	}
+
+	&-submenu {
+		overflow: hidden;
+		transition: all $transitionTime 0.5s;
+		background-color: $submenu-graphite;
+
+		li {
+			padding-left: $iconsMenuWidth;
+		}
+	}
+
+	&-item {
+		position: relative;
+		z-index: 3;
+		margin-bottom: 0;
+		cursor: pointer;
+
+		button,
+		a.urlslab-mainmenu-btn {
+			position: relative;
+			z-index: 1;
+		}
+
+		&.disabled {
+			cursor: default;
+
+			button,
+			a.urlslab-mainmenu-btn {
+				pointer-events: none;
+				opacity: 0.6;
+				cursor: default;
+			}
+		}
+
+		&.active {
+			background-color: color.scale($mainmenu-graphite, $lightness: 16%);
+			transition: all $transitionTime;
+			cursor: default;
+
+			button,
+			a.urlslab-mainmenu-btn {
+				cursor: default;
+				pointer-events: none;
+			}
+		}
+
+		&:not(.active):not(.disabled):not(.submenu)::before {
+			content: "";
+			position: absolute;
+			height: 100%;
+			right: 0;
+			left: -$iconsMenuWidth;
+			background-color: $white;
+			transition: all $transitionTime;
+			opacity: 0;
+
+			.urlslab-mainmenu-icons & {
+				display: none;
+			}
+		}
+
+		@media (hover: hover) {
+
+			&:not(.active):not(.submenu):hover::before {
+				opacity: 0.15;
+			}
+		}
+	}
+}

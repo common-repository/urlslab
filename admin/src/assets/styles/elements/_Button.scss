@@ -1,0 +1,200 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+@use "../elements/MenuArrow" as *;
+
+button.urlslab-button,
+.urlslab-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $grey-light;
+	font-size: 0.8125rem;
+	font-weight: $font-weight-semi;
+	padding: 0.55em 1em;
+	border-radius: 0.375em;
+	transition: all $transitionTime ease;
+	text-decoration: none;
+	color: $black;
+	cursor: pointer;
+
+	&[disabled] {
+		background-color: $grey-lighter;
+		color: $grey-darker;
+	}
+
+	&.xl {
+		padding: 0.55em 1.75em;
+	}
+
+	&.wide {
+		padding: 0.55em 2em;
+	}
+
+	&.dark {
+		background-color: $grey-dark;
+		color: $white;
+
+		@media (hover: hover) {
+
+			&:hover {
+				background-color: $grey-darker;
+			}
+		}
+	}
+
+	&.outline {
+		background-color: $white;
+		border: 1px solid $grey-light;
+
+		&.active {
+			background-color: $desaturated-blue;
+			color: $black;
+
+			@media (hover: hover) {
+
+				&:hover {
+					background-color: $desaturated-blue;
+					color: $black;
+				}
+			}
+		}
+	}
+
+	&.underline {
+		text-decoration: underline;
+	}
+
+	&.simple {
+		background-color: transparent;
+
+		// override default wp styling on anchor focus
+		&:focus {
+			color: $black;
+			box-shadow: none;
+			outline: 0;
+		}
+	}
+
+	&.active {
+		background-color: $primary-color;
+		color: $white;
+
+		&[disabled] {
+			background-color: $disabled-blue;
+		}
+
+		.urlslab-loader {
+			opacity: 1;
+
+			svg.urlslab-loader-anim {
+				filter: invert(1);
+			}
+		}
+	}
+
+	&.danger {
+		background-color: $saturated-red;
+		color: $white;
+	}
+
+	&.small {
+		font-size: 0.75em;
+		padding: 0.5em 1em;
+
+		svg {
+
+			@include square(1em);
+
+			&.urlslab-loader-anim {
+
+				@include square(1.5em);
+				transform: scale(1.15);
+			}
+		}
+	}
+
+	&.with-arrow {
+
+		@extend %MenuArrow;
+		padding-left: 0;
+		padding-right: 0;
+
+		&.simple:hover {
+			color: inherit;
+		}
+
+		&::after {
+			margin-left: 0.8125em;
+		}
+
+		&.flip-arrow {
+
+			&::after {
+				transform: scaleY(-1);
+				top: -0.15em;
+			}
+		}
+	}
+
+	svg {
+
+		@include square(1.5em);
+		fill: currentcolor;
+
+		&.close {
+
+			@include square(0.85em);
+			margin-top: 2px;
+			margin-left: 1em;
+			fill: $grey-darker;
+		}
+	}
+
+	>svg {
+
+		margin-right: 0.5em;
+
+		&:last-child:not(:first-child) {
+			margin-right: 0;
+			margin-left: 0.5em;
+		}
+
+
+	}
+
+	@media (hover: hover) {
+
+		&:hover {
+			background-color: $grey-medium;
+		}
+
+		&[disabled]:hover {
+			background-color: $grey-lighter;
+			cursor: not-allowed;
+		}
+
+		&.simple:hover {
+			background-color: transparent;
+			color: $primary-color;
+		}
+
+		&.active {
+
+			&:hover {
+				background-color: $darker-blue;
+				color: $white;
+			}
+
+			&[disabled]:hover {
+				background-color: $disabled-blue;
+				cursor: not-allowed;
+			}
+		}
+
+		&.danger:hover {
+			background-color: $dark-saturated-red;
+			color: $white;
+		}
+	}
+}

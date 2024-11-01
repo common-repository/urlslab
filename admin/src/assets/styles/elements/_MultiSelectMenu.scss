@@ -1,0 +1,283 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+
+@use "../common/variables" as *;
+@use "../common/mixins" as *;
+@use "../elements/MenuArrow" as *;
+@use "../elements/Inputs" as *;
+
+.urlslab-MultiSelectMenu {
+	position: relative;
+	z-index: 2;
+	max-width: 12em;
+	font-size: 0.8125em;
+	font-family: Poppins, sans-serif;
+	font-weight: $font-weight-normal;
+
+	&.disabled &__title {
+		color: $grey-darker;
+		cursor: default;
+
+		&::after { //menu arrow
+			border: none;
+		}
+
+		@media (hover: hover) {
+
+			&:hover {
+				color: $grey-darker;
+				border-color: $grey-medium;
+			}
+		}
+	}
+
+	&.active {
+		z-index: 3;
+	}
+
+	&.wide {
+		max-width: none;
+	}
+
+	&__title {
+
+		@extend %MenuArrow;
+		display: flex;
+		align-items: center;
+		line-height: 1.2;
+		border: 1px solid $grey-medium;
+		border-radius: 6px;
+		background-color: $white;
+		padding: 0.7em 1em;
+		transition: all 0.2s;
+		min-width: 10em;
+		height: 2.8461em;
+		cursor: pointer;
+
+		span {
+			display: block;
+			text-align: left;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			width: calc(100% - 1.5em);
+
+			+ span {
+				display: none;
+			}
+		}
+
+		svg {
+			margin-right: 0.5em;
+		}
+
+		&.active {
+			color: $primary-color;
+			border-color: currentcolor;
+		}
+
+		@media (hover: hover) {
+
+			&:hover {
+				color: $primary-color;
+				border-color: currentcolor;
+			}
+
+			&.active:hover {
+				color: $black;
+				border-color: $grey-light;
+			}
+		}
+
+		&.dark {
+			background-color: $black-real;
+			color: $white;
+			border-color: $white;
+
+			@media (hover: hover) {
+
+				&:hover {
+					color: currentcolor;
+					border-color: currentcolor;
+				}
+
+				&.active:hover {
+					color: currentcolor;
+					border-color: currentcolor;
+				}
+			}
+
+			&::after {
+				border-top-color: $white;
+			}
+
+		}
+
+	}
+
+	&__items {
+		position: absolute;
+		top: calc(100% + 1px);
+		left: 0;
+		display: none;
+		opacity: 0;
+		border-radius: 6px;
+		background-color: $white;
+		width: calc(100% + 5em);
+		padding: 1em 1.45em;
+		transition: opacity 0.1s;
+		filter: $box-shadow-small;
+
+		.urlslab-panel-modal & {
+			width: calc(100% + 0.5em);
+		}
+
+		.menu-left & {
+			left: auto;
+			right: 0;
+		}
+
+		&.menuInput {
+			min-width: 15em;
+			max-width: 25em;
+		}
+
+		.wide & {
+			left: 0;
+			width: 100%;
+		}
+
+		&--inn {
+
+			@include scrollbar;
+			max-height: 19em;
+			overflow-y: scroll;
+			position: relative;
+			margin-left: -1.45em;
+			margin-right: -1.45em;
+
+			> *[class] {
+				display: flex;
+				align-content: center;
+				justify-content: flex-start;
+				width: 100%;
+				padding: 0.5em 1em;
+				margin-bottom: 0.25em;
+			}
+
+			.menu-left & {
+				margin-right: -1.25em;
+			}
+		}
+
+		&.active {
+			display: block;
+		}
+
+		&.visible {
+			opacity: 1;
+		}
+
+		&.dark {
+			background-color: $black-real;
+			color: $white;
+			border-color: $white;
+
+			@media (hover: hover) {
+
+				&:hover {
+					color: currentcolor;
+					border-color: currentcolor;
+				}
+
+				&.active:hover {
+					color: currentcolor;
+					border-color: currentcolor;
+				}
+			}
+		}
+	}
+
+	label,
+	.label {
+
+		&.urlslab-MultiSelectMenu__item {
+
+			// hotfix to not override mui fontWeight of tag and prevent !important weight
+			*:not(.urlslab-tag) {
+				font-weight: inherit;
+			}
+
+			strong {
+				font-weight: $font-weight-semi;
+			}
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+
+			&.selectAll {
+				justify-content: center;
+				width: calc(50% - 0.5em);
+				padding: 0.5em;
+				background-color: $grey-lighter;
+
+				&.width-100 {
+					width: 100%;
+				}
+
+				.urlslab-checkbox-box {
+					display: none;
+				}
+			}
+
+			&:not(.menuInput) {
+
+				@media (hover: hover) {
+
+					&:hover {
+						background-color: $grey-lightest;
+					}
+				}
+			}
+
+			&.dark {
+
+				&:not(.menuInput) {
+
+					@media (hover: hover) {
+
+						&:hover {
+							background-color: $primary-color;
+						}
+					}
+				}
+
+			}
+		}
+	}
+
+	// temporary single selects without checkboxed items, until replaced with mui
+	&.is-single-select {
+
+		ul.urlslab-MultiSelectMenu__items--inn {
+			font-size: inherit;
+			margin-top: 0;
+			margin-bottom: 0;
+			padding: 0;
+
+			li {
+				margin-bottom: 0;
+
+				&.active {
+					color: $primary-color;
+				}
+
+				&:hover {
+					cursor: pointer;
+					background-color: $grey-lightest;
+				}
+			}
+		}
+
+	}
+}

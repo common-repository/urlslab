@@ -1,0 +1,10 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-DynamicModule {
+	flex: 1;
+
+	.urlslab-modules {
+		padding: 1.5em;
+	}
+}

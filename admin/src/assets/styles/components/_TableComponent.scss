@@ -1,0 +1,147 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+$cellHeight: 3.5em;
+
+.urlslab-table {
+
+	&-fake {
+		position: relative;
+		width: 37.26%;
+		height: 0;
+		margin: auto;
+		min-height: calc(100vh - var(--headerTopHeight) - var(--headerBottomHeight) - var(--headerMenuHeight) - 8.5em);
+		background: url(../../images/faketable.png) center center no-repeat;
+		background-size: contain;
+
+		&-inn {
+
+			@include posZero;
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 1;
+		}
+	}
+
+	&-rowLimit {
+		text-align: center;
+		background-color: $white;
+		border-radius: 1em;
+		color: $dark-saturated-red;
+		padding: 0.5em 1em;
+		font-size: 1rem;
+	}
+
+	&-container {
+
+		@include scrollbarWithBg();
+		position: relative;
+		// use max-height because of few rows tables
+		// prevent underlying wrapper and horizontal scrollbar moved to the bottom of screen
+		// temporary used height again because of hidden dropdowns in few lines tables,
+		// will be used max-height again after mui dropdowns integration
+		--Table-height: calc(100vh - var(--headerTopHeight) - var(--headerMenuHeight) - var(--headerBottomHeight) - var(--wp-admin--admin-bar--height, 32px));
+		height: var(--Table-height);
+		width: calc(var(--tableContainerWidth) - $mainMenuWidth);
+		overflow: auto;
+	}
+
+	td {
+
+		&.checkbox .urlslab-checkbox-box {
+			background-image: url(../../images/checkbox-inactive.svg);
+			box-shadow: none;
+		}
+
+		&.selected {
+
+			&.checkbox .urlslab-checkbox-box {
+				background-image: url(../../images/checkbox-active.svg);
+			}
+		}
+	}
+
+	th,
+	td {
+
+		.browserIcon {
+			width: 2em;
+		}
+	}
+
+	&.resizable {
+
+		th,
+		td {
+			display: flex;
+			align-items: center;
+			height: $cellHeight;
+
+			> *:not(.resizer):not(img):not(.img):not(picture) {
+				width: 100%;
+			}
+		}
+	}
+
+	&.resizable tr {
+		height: $cellHeight;
+	}
+
+	.thumbnail {
+
+		a,
+		.thumbnail-wrapper {
+			display: block;
+			object-fit: cover;
+			object-position: center top;
+			overflow: hidden;
+			height: 3em;
+		}
+
+		picture,
+		img,
+		.img {
+			width: 100%;
+		}
+	}
+
+	.youtube-status {
+		text-align: center;
+
+		&-bullet {
+
+			@include square(8px);
+			display: block;
+			border-radius: 50%;
+			overflow: hidden;
+			text-indent: -9999px;
+
+			&-A {
+				background-color: $saturated-green;
+			}
+
+			&-D {
+				background-color: $saturated-red;
+			}
+		}
+	}
+
+	.video-thumbnail {
+		width: 6em !important;
+		height: 4em;
+		overflow: hidden;
+		border-radius: 0.625rem;
+
+		img {
+
+			height: 140%;
+			object-fit: cover;
+			transform: translateY(-50%);
+			position: relative;
+			top: 50%;
+		}
+	}
+}

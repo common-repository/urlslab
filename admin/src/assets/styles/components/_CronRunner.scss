@@ -1,0 +1,29 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-cronrunner {
+
+	&[class] {
+
+		@include square(2.5em);
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $grey-light;
+		border-radius: 50%;
+	}
+
+	span,
+	svg {
+
+		@include square(1.25em);
+
+		@media (hover: hover) {
+
+			&:hover {
+				fill: $primary-color;
+			}
+		}
+	}
+}

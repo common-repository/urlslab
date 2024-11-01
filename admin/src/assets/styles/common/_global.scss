@@ -1,0 +1,303 @@
+/* stylelint-disable no-descending-specificity */
+@use "variables" as *;
+@use "mixins" as *;
+
+body {
+
+	&.noscroll {
+		max-height: 100vh;
+		overflow: hidden;
+	}
+
+	#urlslab-svg-sprites {
+		display: none;
+	}
+}
+
+[id="urlslab-root"] {
+	background-color: $grey-lighter;
+	font-family: Poppins, sans-serif;
+	font-size: 16px;
+
+	*,
+	::before,
+	::after {
+		box-sizing: border-box;
+	}
+
+	a:not(.urlslab-button),
+	.link-style {
+		cursor: pointer;
+		// override default wp styling on anchor focus
+		&:focus {
+			box-shadow: none;
+			outline: 0;
+		}
+
+		// do not apply on mui links
+		// a:not() has higher specificity than mui styles
+		&:not(.MuiListItemButton-root):not(.MuiButton-root):not(.MuiIconButton-root):not(.MuiBox-root) {
+			font-weight: 600;
+			color: $black;
+
+			&:hover {
+				color: $primary-color;
+			}
+		}
+	}
+
+	.scrollBarArea {
+
+		@include scrollbar;
+		overflow-y: scroll;
+	}
+
+	.columns-2 {
+		columns: 2;
+		column-gap: 1em;
+	}
+
+	.hidden,
+	[name*="hidden"] {
+		display: none;
+	}
+
+	button {
+
+		@include appearance;
+		outline: none;
+		border: none;
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+	&.dark {
+
+		&::before {
+
+			@include posZero;
+			left: 160px; // WP admin menu width
+			content: "";
+			position: fixed;
+			z-index: 9998;
+			background-color: #24292f;
+			opacity: 0.6;
+			transition: opacity $transitionTime;
+		}
+
+		// notifications from panel
+		.urlslab-notifications {
+			z-index: 10000;
+
+			&-panel[class] {
+				background-color: $white;
+			}
+		}
+	}
+
+	.fadeInto {
+		animation: fadeIn $transitionTime;
+	}
+
+	.apiIcon {
+		border-radius: 50%;
+		background-color: $desaturated-blue;
+		flex: 0 0 auto;
+
+		&.xxl {
+
+			@include square(4.75em);
+		}
+
+		svg {
+
+			@include square(100%);
+		}
+	}
+
+	.urlslab-learnMore {
+		display: flex;
+		align-items: center;
+		font-size: 0.8125rem;
+		font-weight: $font-weight-semi;
+		text-decoration: underline;
+		color: $black;
+		padding: 0;
+		cursor: pointer;
+		transition: all 0.2s;
+
+		svg {
+			margin-left: 0.5em;
+			fill: currentcolor;
+			transform: translateX(0);
+			transition: transform 0.2s;
+		}
+
+		@media (hover: hover) {
+
+			&:hover {
+				color: $primary-color;
+
+				svg {
+					transform: translateX(0.25em);
+				}
+			}
+		}
+	}
+
+	.pos {
+
+		&-relative {
+			position: relative !important;
+		}
+
+		&-absolute {
+			position: absolute !important;
+		}
+
+		&-sticky {
+			position: sticky !important;
+		}
+
+		&-fixed {
+			position: fixed !important;
+		}
+	}
+
+
+	.flex {
+		display: flex;
+
+		&-inline {
+			display: inline-flex;
+		}
+
+		&-align-start {
+			align-items: flex-start;
+			align-content: flex-start;
+		}
+
+		&-align-end {
+			align-items: flex-start;
+			align-content: flex-start;
+		}
+
+		&-align-center {
+			align-items: center;
+			align-content: center;
+		}
+
+		&-justify-center {
+			justify-content: center;
+		}
+
+		&-justify-end {
+			justify-content: flex-end;
+		}
+
+		&-justify-space-between {
+			justify-content: space-between;
+		}
+
+		&-wrap {
+			flex-wrap: wrap;
+		}
+
+		&-column {
+			flex-direction: column;
+		}
+
+		@media (min-width: $breakpoint-tablet) {
+
+			&-tablet {
+				display: flex;
+			}
+		}
+
+		@media (min-width: $breakpoint-tablet-landscape) {
+
+			&-tablet-landscape {
+				display: flex;
+			}
+		}
+	}
+
+	.text-align-center {
+		text-align: center;
+	}
+
+	.text-align-right {
+		text-align: right;
+	}
+
+	[class*="limit-"]:not(th):not(td),
+	%ellipsis {
+		display: block;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	td:not(.nolimit) .limit a {
+
+		@extend %ellipsis;
+	}
+
+	.limit {
+		width: 100%;
+	}
+
+	.limit-20 {
+		max-width: 20ch;
+	}
+
+	.limit-50 {
+		max-width: 50ch;
+	}
+
+	.limit-100 {
+		max-width: 100ch;
+	}
+
+	.limit-200 {
+		max-width: 200ch;
+	}
+}
+
+
+/** General styles **/
+
+.urlslab-error-notification {
+	margin-top: 10px;
+	background-color: #fff;
+	border-left: 3px solid #f00;
+	border-radius: $br-10;
+	padding: 1em;
+}
+
+.urlslab-scrollbar {
+
+	@include scrollbar;
+}
+
+@keyframes fadeIn {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes rotate {
+
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

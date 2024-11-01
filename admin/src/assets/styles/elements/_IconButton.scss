@@ -1,0 +1,89 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+
+.urlslab-icon-button {
+	display: flex;
+	align-items: center;
+	padding: 0;
+
+	.urlslab-tooltip {
+		width: min-content;
+	}
+
+	&.info {
+
+		svg {
+
+			@include square(1rem);
+			fill: $primary-color;
+		}
+	}
+
+	&.info-grey {
+
+		svg {
+
+			@include square(1rem);
+			fill: $grey-medium-lighter;
+		}
+
+		&:hover {
+
+			svg {
+				fill: $grey-medium-lighter;
+			}
+		}
+	}
+
+	&.info-grey-darker {
+
+		svg {
+
+			@include square(1rem);
+			fill: $grey-darker;
+		}
+
+		&:hover {
+
+			svg {
+				fill: $grey-darker;
+			}
+		}
+	}
+
+	&.smallCircle {
+
+		@include square(1.5em);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1 0 auto;
+		border-radius: 50%;
+		padding: 0.1em;
+
+		svg {
+
+			@include square(0.75em);
+		}
+	}
+
+	svg {
+
+		@include square(1.5rem);
+		fill: $black;
+	}
+
+	&.active,
+	&:hover {
+
+		svg {
+			fill: $primary-color;
+		}
+	}
+
+	&.refresh-icon.refreshing svg {
+		animation: 0.75s rotate linear infinite;
+	}
+}

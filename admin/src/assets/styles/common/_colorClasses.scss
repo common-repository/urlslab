@@ -1,0 +1,59 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+$colorClasses: (
+	"primary-color": $primary-color,
+	"black": $black,
+	"black-real": $black-real,
+	"grey-darker": $grey-darker,
+	"grey-dark": $grey-dark,
+	"grey-medium-lighter": $grey-medium-lighter,
+	"grey-medium": $grey-medium,
+	"grey-light": $grey-light,
+	"grey-lighter": $grey-lighter,
+	"grey-lightest": $grey-lightest,
+	"white": $white,
+
+	"saturated-blue": $saturated-blue,
+	"darker-blue": $darker-blue,
+	"lighter-blue": $lighter-blue,
+	"desaturated-blue": $desaturated-blue,
+	"saturated-cyan": $saturated-cyan,
+	"desaturated-cyan": $desaturated-cyan,
+	"saturated-green": $saturated-green,
+	"desaturated-green": $desaturated-green,
+	"saturated-red": $saturated-red,
+	"dark-saturated-red": $dark-saturated-red,
+	"darker-saturated-red": $darker-saturated-red,
+	"desaturated-red": $desaturated-red,
+	"saturated-orange": $saturated-orange,
+	"desaturated-orange": $desaturated-orange,
+);
+
+:root {
+
+	@each $class, $color in $colorClasses {
+		--urlslab-palette-#{$class}: #{$color};
+	}
+}
+
+@each $class, $color in $colorClasses {
+	.c-#{$class} {
+		color: $color !important;
+
+		svg {
+			fill: currentcolor !important;
+		}
+	}
+
+	svg.c-#{$class} {
+		fill: currentcolor !important;
+	}
+
+	.bg-#{$class} {
+		background-color: $color !important;
+	}
+	.border-#{$class} {
+		border-color: $color !important;
+	}
+}

@@ -1,0 +1,121 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-tooltip {
+	position: absolute;
+	z-index: 999999;
+	display: inline-flex;
+	background-color: $black;
+	box-shadow: $box-shadow-small;
+	border-radius: $br-10;
+	font-size: 0.75rem;
+	text-align: left;
+	padding: 0.33em 0.85em;
+	max-width: 30em;
+	color: $white;
+	transform: translateZ(0);
+	word-break: normal;
+	hyphens: auto;
+
+	a {
+		color: $white !important;
+	}
+
+	&.fixedBottom {
+		position: fixed;
+		left: calc(160px + 50%);
+		top: 100vh;
+		transform: translate(-50%, -3em);
+	}
+
+	&.successStatus {
+		background-color: $saturated-green;
+	}
+
+	&.errorStatus {
+		background-color: $saturated-red;
+	}
+
+	&.showOnHover {
+		display: none;
+		top: 80%;
+
+		*:hover > & {
+			display: block;
+		}
+	}
+
+	&.align-center {
+
+		@include absoluteCenter;
+	}
+
+	&.align-left {
+		right: 70%;
+	}
+
+	&.align-left-0 {
+		right: 0%;
+	}
+
+	&.xl {
+		width: 150%;
+	}
+
+	&.xxl {
+		width: 200%;
+	}
+
+	&.xxxl {
+		width: 300%;
+	}
+
+	img,
+	.img,
+	picture {
+		margin: 0.5em;
+		max-width: 15em;
+		height: auto !important;
+	}
+
+	&.withImage {
+		overflow: hidden;
+		max-height: 13em;
+		padding: 0.35em;
+
+		.imageWrapper {
+			height: auto;
+			overflow: hidden;
+			object-fit: cover;
+			border-radius: $br-10;
+		}
+
+		img {
+
+			@include square(100%);
+			margin: 0;
+		}
+	}
+
+	table td & {
+		display: none;
+		top: 85%;
+		word-break: break-word;
+	}
+
+	table th & {
+		width: 12em !important;
+	}
+
+	.urlslab-table-container > & {
+		left: 50%;
+	}
+
+	table td:hover > & {
+		display: inline-flex;
+	}
+
+	table td *:hover > & {
+		display: inline-flex;
+	}
+}
